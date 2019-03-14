@@ -19,6 +19,28 @@ const aboutContent = "Hac habitasse platea dictumst vestibulum rhoncus est pelle
 const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rhoncus urna neque viverra justo nec ultrices. Arcu dui vivamus arcu felis bibendum. Consectetur adipiscing elit duis tristique. Risus viverra adipiscing at in tellus integer feugiat. Sapien nec sagittis aliquam malesuada bibendum arcu vitae. Consequat interdum varius sit amet mattis. Iaculis nunc sed augue lacus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing elit. Pulvinar elementum integer enim neque. Ultrices gravida dictum fusce ut placerat orci nulla. Mauris in aliquam sem fringilla ut morbi tincidunt. Tortor posuere ac ut consequat semper viverra nam libero.";
 
 
+//Todays Date
+
+let today = new Date();
+let dd = today.getDate();
+let mm = today.getMonth() + 1; //January is 0!
+let yyyy = today.getFullYear();
+
+if (dd < 10) {
+  dd = '0' + dd;
+}
+
+if (mm < 10) {
+  mm = '0' + mm;
+}
+
+today = dd + '/' + mm + '/' + yyyy;
+
+// author
+
+let author = "Martin";
+
+
 
 //server setup}
 const app = express();
@@ -38,7 +60,8 @@ const postSchema = {
   title: String,
   content: String,
   imageURL: String,
-  ytURL: String
+  ytURL: String,
+  date: String
 };
 //create the mongoose model
 const Post = mongoose.model("Post", postSchema);
@@ -51,7 +74,7 @@ const Post = mongoose.model("Post", postSchema);
 app.get("/", (req,res) => {
   Post.find({}, function (err, posts) {
   res.render("home", {home: homeStartingContent, posts: posts});
-  console.log(posts);
+
 });
 
 }
@@ -70,10 +93,14 @@ app.get("/compose", (req,res) => {
   res.render("compose");
 });
 
+app.get("/subscribe", (req,res) => {
+  res.render("subscribe");
+});
+
 app.get("/posts/:postId", (req,res) => {
 const requestedPostId = req.params.postId;
 Post.findOne({_id: requestedPostId}, function(err,post){
-  res.render("post", {title: post.title, content: post.content, image: post.imageURL, yt: post.ytURL});
+  res.render("post", {title: post.title, content: post.content, image: post.imageURL, yt: post.ytURL, date: post.date, author: author});
 });
 
 });
@@ -85,12 +112,14 @@ const post = new Post ({
   title: req.body.blogtitle,
   content: req.body.blogpost,
   imageURL: req.body.imageURL,
-  ytURL: req.body.ytURL
+  ytURL: req.body.ytURL,
+  date: today
 });
 
 post.save(function(err){
   if (!err) {
     res.redirect("/");
+    console.log(post);
   } else {
     console.log(err);
   }

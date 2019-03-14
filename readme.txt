@@ -20,4 +20,11 @@ EJS BLOG - Prototype
     - Changed Footer.
     - Changed to bootstrap V4.
     - Added images to blogpost, using outside URL
-    - Added youtube URL to compose.ejs which puts a Youtube video on the post.
+    - Added youtube URL to compose.ejs which puts a YouTube video on the post.
+
+0.2.1 - Added toggler button to the NavBar
+      - Added correct routes for links
+      - Added subscribe form & subscribe route
+      - Modified Home.ejs, added social media buttons, fixed img cards.
+      - Added date to postSchema, which is the day its posted.
+      - Added Author variable, which will be changed to a signature later on.
