@@ -8,3 +8,16 @@ EJS BLOG - Prototype
 -Possible implementations -> Possibility of adding an image from an outside url
                           -> Adding a DB for the posts, which I guess if I'm adding MongoDB, images will have to be stored as url,
                           will have to be loaded dynamically with ejs.
+                          -> Add dynamic rendering for pages of posts.
+                          -> Add post signature
+                          -> Add date to posts.
+
+
+0.2 - Implemented MongoDB database, for localhost.
+    - Revamped home.ejs
+    - Revamped post.ejs
+    - Introduced Posts as image cards, bootstrap.
+    - Changed Footer.
+    - Changed to bootstrap V4.
+    - Added images to blogpost, using outside URL
+    - Added youtube URL to compose.ejs which puts a Youtube video on the post.

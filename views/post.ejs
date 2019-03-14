@@ -2,11 +2,35 @@
 
 
 
-<h1><%=  postTitle %></h1>
-<p><%=  postContent %></p>
+
+
+<div class="container">
+  <h1><%=  title %></h1>
+</div>
+ <div style="width:100%;">
+<div style="float:left;">
+<img class="post-image" src="<%=image%>" alt=""></div>
+<div style="float:none;"><p style="text-align:justify;"><%=  content %></p></div>
+
+   </div>
+<div class="container yt">
+
+  <div class="">
+   <% if (typeof yt == 'undefined' ) { %>
+
+             <p> no video found for this post</p>
+         <% } else { %>
+
+              <iframe id="ytplayer" type="text/html" width="560" height="315"
+                src="<%= yt %>"
+                frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+  <% } %>
 
 
 
+</div>
+</div>
 
 
 

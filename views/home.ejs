@@ -2,19 +2,48 @@
 
 
 
-<h1>Home</h1>
-<p><%= home %></p>
+<section class="jumbotron text-center">
+     <div class="container">
+       <h1 class="jumbotron-heading">Album example</h1>
+       <p class="lead text-muted"><%= home %></p>
+       <p>
+         <a href="#" class="btn btn-primary my-2">Main call to action</a>
+         <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+       </p>
+     </div>
+   </section>
+
+
 
 
 
 <%console.log(posts)%>
+<div class="row">
+<% posts.forEach(function(posts) { %>
+  <% const url = "/posts/" + posts._id %>
+  <div class="col-md-4">
+      <div class="card mb-4 shadow-sm">
+        <a href="<%= url %>"><img class="card-img-top" src="<%=posts.imageURL%>" alt="Card image cap"></a>
+          <div class="card-body">
+            <h1><%=  posts.title %></h1>
+            <% if (typeof posts.content == 'undefined' ) { %>
+                      <p> no content</p>
+                  <% } else { %>
+                    <p><%=  posts.content.substring(0,300) %> ...<a class="grey" href="<%= url %>">read more</a> </p>
+           <% } %>
 
-<% posts.forEach(function(post) { %>
-  <% const url = "/posts/" + post.title %>
-  <h1><%=  post.title %></h1>
 
-  <p><%=  (post.blogcontent).substring(0,300) %> ...<a class="grey" href="<%= url %>">read more</a> </p>
-<%});%>
+                      <a href="<%= url %>" class="btn btn-outline-secondary btn-sm" role="button" aria-pressed="true">Leer Más</a>
+
+         </div>
+     </div>
+   </div>
+          <%});%>
+
+
+</div>
+
+
 
 
 
