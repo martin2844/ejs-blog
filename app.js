@@ -105,6 +105,22 @@ Post.findOne({_id: requestedPostId}, function(err,post){
 
 });
 
+
+app.post("/find", (req, res) => {
+  let keyWord = req.body.keyword;
+  console.log(keyWord);
+  Post.find({}, function (err, posts) {
+  res.render("find", {keyWord: keyWord });
+});
+});
+
+
+app.get("/find", (req,res) => {
+  const findTerm = req.params.findWord;
+  console.log(findTerm);
+});
+
+
 //posts
 
 app.post("/compose", (req,res) => {
