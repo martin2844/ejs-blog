@@ -28,3 +28,6 @@ EJS BLOG - Prototype
       - Modified Home.ejs, added social media buttons, fixed img cards.
       - Added date to postSchema, which is the day its posted.
       - Added Author variable, which will be changed to a signature later on.
+
+0.2.2 - Add tag to postSchema, this will give a sort of blog tag to each post
+      - Added tags to the card at Home, having error at finding the tags. Must resolve.

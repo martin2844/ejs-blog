@@ -61,7 +61,9 @@ const postSchema = {
   content: String,
   imageURL: String,
   ytURL: String,
-  date: String
+  date: String,
+  tag1: String,
+  tag2: String
 };
 //create the mongoose model
 const Post = mongoose.model("Post", postSchema);
@@ -100,10 +102,27 @@ app.get("/subscribe", (req,res) => {
 app.get("/posts/:postId", (req,res) => {
 const requestedPostId = req.params.postId;
 Post.findOne({_id: requestedPostId}, function(err,post){
-  res.render("post", {title: post.title, content: post.content, image: post.imageURL, yt: post.ytURL, date: post.date, author: author});
+  res.render("post", {title: post.title, 
+    content: post.content, 
+    image: post.imageURL, 
+    yt: post.ytURL, 
+    date: post.date, 
+    author: author,
+    tag1: post.tag1,
+    tag2: post.tag2});
 });
 
 });
+
+
+app.get("/posts/:tagFound", (req,res) => {
+  const requestedTag = req.params.tagFound;
+  Post.find( {$or:[ {tag1: requestedTag}, {tag2:requestedTag} ] } , function(err,post){
+    res.render("tag", {posts: posts, tag: requestedTag });
+  });
+  
+  });
+  
 
 
 app.post("/find", (req, res) => {
@@ -129,7 +148,9 @@ const post = new Post ({
   content: req.body.blogpost,
   imageURL: req.body.imageURL,
   ytURL: req.body.ytURL,
-  date: today
+  date: today,
+  tag1: req.body.tag1,
+  tag2: req.body.tag2
 });
 
 post.save(function(err){
