@@ -33,3 +33,8 @@ EJS BLOG - Prototype
       - Added tags to the card at Home, having error at finding the tags. Must resolve.
     (fix) --> tag.ejs is now working, clicking on a card's tag will bring you to a page that
     contains all posts with said tag.
+
+0.2.3 - Finished find functionality, its very basic and probably bad optimized, but 
+      it will find all posts who's content or title includes the keyWord 
+      which was put in the search box.
+      - Changed around a couple of titles in the tag.ejs

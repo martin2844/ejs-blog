@@ -4,7 +4,7 @@
 
 <section class="jumbotron text-center">
      <div class="container">
-       <h1 class="jumbotron-heading">Album example</h1>
+       <h2 class="jumbotron-heading">Mostrando todos los posts con el tag de:</h2>
        <p class="lead text-muted"><%= tag %></p>
        
      </div>
@@ -14,30 +14,31 @@
 
 
 
-
-<div class="row">
-<% posts.forEach(function(posts) { %>
-  <% const url = "/posts/" + posts._id %>
-  <div class="col-md-4">
-      <div class="card mb-4 shadow-sm">
-        <a href="<%= url %>"><img class="card-img-top" src="<%=posts.imageURL%>" alt="Card image cap"></a>
-          <div class="card-body">
-            <h1><%=  posts.title %></h1>
-            <% if (typeof posts.content == 'undefined' ) { %>
-                      <p> no content</p>
-                  <% } else { %>
-                    <p style="text-align: justify;"><%=  posts.content.substring(0,300) %> ...</p>
-           <% } %>
-
-
-                      <a href="<%= url %>" class="btn btn-outline-secondary btn-sm" role="button" aria-pressed="true">Leer Más</a>
-                      <a href="<%= url %>" class="btn btn-outline-primary btn-sm" role="button" aria-pressed="true">#<%= posts.tag1 %></a>
-                      <a href="<%= url %>" class="btn btn-outline-primary btn-sm" role="button" aria-pressed="true">#<%= posts.tag2 %></a>
-
+   <div class="row">
+    <% posts.forEach(function(posts) { %>
+      <% const url = "/posts/" + posts._id %>
+      <% const tag1Url = "/tags/" + posts.tag1 %>
+      <% const tag2Url = "/tags/" + posts.tag2 %>
+      <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <a href="<%= url %>"><img class="card-img-top" src="<%=posts.imageURL%>" alt="Card image cap"></a>
+              <div class="card-body">
+                <h1><%=  posts.title %></h1>
+                <% if (typeof posts.content == 'undefined' ) { %>
+                          <p> no content</p>
+                      <% } else { %>
+                        <p style="text-align: justify;"><%=  posts.content.substring(0,300) %> ...</p>
+               <% } %>
+    
+    
+                          <a href="<%= url %>" class="btn btn-outline-secondary btn-sm" role="button" aria-pressed="true">Leer Más</a>
+                          <a href="<%= tag1Url %>" class="btn btn-outline-primary btn-sm" role="button" aria-pressed="true">#<%= posts.tag1 %></a>
+                          <a href="<%= tag2Url %>" class="btn btn-outline-primary btn-sm" role="button" aria-pressed="true">#<%= posts.tag2 %></a>
+    
+             </div>
          </div>
-     </div>
-   </div>
-          <%});%>
+       </div>
+              <%});%>
 
 
 </div>

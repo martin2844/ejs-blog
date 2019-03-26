@@ -1,7 +1,45 @@
 <%- include("partials/header") -%>
 
 
+<section class="jumbotron text-center">
+    <div class="container">
+      <h2 class="jumbotron-heading">Mostrando resultados para busqueda de:</h2>
+      <p class="lead text-muted"><%= keyWord %></p>
+    </div>
+  </section>
 
+
+<div class="row">
+    <% posts.forEach(function(posts) { %>
+      <% const url = "/posts/" + posts._id %>
+      <% const tag1Url = "/tags/" + posts.tag1 %>
+      <% const tag2Url = "/tags/" + posts.tag2 %>
+      <% const postContent = posts.content.toLowerCase(); %>
+      <% const postTitle = posts.title.toLowerCase(); %>
+      <% if (postContent.includes(keyWord) || postTitle.includes(keyWord)) { %>
+      <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <a href="<%= url %>"><img class="card-img-top" src="<%=posts.imageURL%>" alt="Card image cap"></a>
+              <div class="card-body">
+                <h1><%=  posts.title %></h1>
+               
+                      
+                        <p style="text-align: justify;"><%=  posts.content.substring(0,300) %> ...</p>
+              
+    
+    
+                          <a href="<%= url %>" class="btn btn-outline-secondary btn-sm" role="button" aria-pressed="true">Leer Más</a>
+                          <a href="<%= tag1Url %>" class="btn btn-outline-primary btn-sm" role="button" aria-pressed="true">#<%= posts.tag1 %></a>
+                          <a href="<%= tag2Url %>" class="btn btn-outline-primary btn-sm" role="button" aria-pressed="true">#<%= posts.tag2 %></a>
+    
+             </div>
+         </div>
+       </div>
+       <% } else { %>
+<h1>NO CONTENT FOUND</h1>
+
+      <% } %>
+              <%});%>
 
 
 

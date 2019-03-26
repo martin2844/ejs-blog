@@ -127,10 +127,11 @@ app.get("/tags/:tagFound", (req,res) => {
 
 
 app.post("/find", (req, res) => {
-  let keyWord = req.body.keyword;
+  let keyWordCap = req.body.keyword;
+  let keyWord = _.lowerCase(keyWordCap)
   console.log(keyWord);
   Post.find({}, function (err, posts) {
-  res.render("find", {keyWord: keyWord });
+  res.render("find", {keyWord: keyWord, posts: posts});
 });
 });
 
