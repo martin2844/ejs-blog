@@ -31,3 +31,5 @@ EJS BLOG - Prototype
 
 0.2.2 - Add tag to postSchema, this will give a sort of blog tag to each post
       - Added tags to the card at Home, having error at finding the tags. Must resolve.
+    (fix) --> tag.ejs is now working, clicking on a card's tag will bring you to a page that
+    contains all posts with said tag.

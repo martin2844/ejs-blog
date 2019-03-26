@@ -56,7 +56,7 @@ app.use(express.static("public"));
 mongoose.connect("mongodb://localhost:27017/blogDB", {useNewUrlParser:true});
 
 //create the schema for the posts
-const postSchema = {
+const postSchema = new mongoose.Schema ({
   title: String,
   content: String,
   imageURL: String,
@@ -64,7 +64,7 @@ const postSchema = {
   date: String,
   tag1: String,
   tag2: String
-};
+});
 //create the mongoose model
 const Post = mongoose.model("Post", postSchema);
 
@@ -115,10 +115,11 @@ Post.findOne({_id: requestedPostId}, function(err,post){
 });
 
 
-app.get("/posts/:tagFound", (req,res) => {
+app.get("/tags/:tagFound", (req,res) => {
   const requestedTag = req.params.tagFound;
-  Post.find( {$or:[ {tag1: requestedTag}, {tag2:requestedTag} ] } , function(err,post){
-    res.render("tag", {posts: posts, tag: requestedTag });
+  console.log(requestedTag);
+  Post.find( {$or:[ {tag1: requestedTag}, {tag2:requestedTag} ] } , function(err,posts){
+    if(!err) res.render("tag", {posts: posts, tag: requestedTag });
   });
   
   });

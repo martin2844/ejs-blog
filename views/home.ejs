@@ -21,8 +21,8 @@
 <div class="row">
 <% posts.forEach(function(posts) { %>
   <% const url = "/posts/" + posts._id %>
-  <% const tag1Url = "/posts/" + posts.tag1 %>
-  <% const tag2Url = "/posts/" + posts.tag2 %>
+  <% const tag1Url = "/tags/" + posts.tag1 %>
+  <% const tag2Url = "/tags/" + posts.tag2 %>
   <div class="col-md-4">
       <div class="card mb-4 shadow-sm">
         <a href="<%= url %>"><img class="card-img-top" src="<%=posts.imageURL%>" alt="Card image cap"></a>
