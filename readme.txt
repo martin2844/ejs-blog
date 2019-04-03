@@ -34,7 +34,10 @@ EJS BLOG - Prototype
     (fix) --> tag.ejs is now working, clicking on a card's tag will bring you to a page that
     contains all posts with said tag.
 
-0.2.3 - Finished find functionality, its very basic and probably bad optimized, but 
-      it will find all posts who's content or title includes the keyWord 
+0.2.3 - Finished find functionality, its very basic and probably bad optimized, but
+      it will find all posts who's content or title includes the keyWord
       which was put in the search box.
       - Changed around a couple of titles in the tag.ejs
+
+0.2.4 - Fixed bug with find functionality, looping a NO CONTENT h1 tag everytime a post didn't match
+      the correct keyWord

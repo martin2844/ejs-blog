@@ -102,11 +102,11 @@ app.get("/subscribe", (req,res) => {
 app.get("/posts/:postId", (req,res) => {
 const requestedPostId = req.params.postId;
 Post.findOne({_id: requestedPostId}, function(err,post){
-  res.render("post", {title: post.title, 
-    content: post.content, 
-    image: post.imageURL, 
-    yt: post.ytURL, 
-    date: post.date, 
+  res.render("post", {title: post.title,
+    content: post.content,
+    image: post.imageURL,
+    yt: post.ytURL,
+    date: post.date,
     author: author,
     tag1: post.tag1,
     tag2: post.tag2});
@@ -121,14 +121,14 @@ app.get("/tags/:tagFound", (req,res) => {
   Post.find( {$or:[ {tag1: requestedTag}, {tag2:requestedTag} ] } , function(err,posts){
     if(!err) res.render("tag", {posts: posts, tag: requestedTag });
   });
-  
+
   });
-  
+
 
 
 app.post("/find", (req, res) => {
   let keyWordCap = req.body.keyword;
-  let keyWord = _.lowerCase(keyWordCap)
+  let keyWord = _.lowerCase(keyWordCap);
   console.log(keyWord);
   Post.find({}, function (err, posts) {
   res.render("find", {keyWord: keyWord, posts: posts});
