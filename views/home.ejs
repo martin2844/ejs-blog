@@ -47,8 +47,42 @@
 
 </div>
 
+<% if (pages) { %>
 
+<!-- Pagination -->
 
+<nav>
+  <ul class="pagination">
+    <!-- First Page -->
+    <% if (current == 1) { %>
+    <li class="page-item disabled"><a class="page-link" href="#">Primer Pagina</a></li>
+    <% } else { %>
+    <li class="page-item"><a class="page-link" href="/">Primer Página</a></li>
+    <% } %>
+
+    <!-- Pages  -->
+    <% let i = (Number(current) > 5 ? Number(current) - 4 : 1)%>
+    <% if(i !== 1) {%>
+    <li class="page-item"><a class="page-link" href="#">...</a></li>
+
+    <% } %>
+    <% for(; i <= (Number(current) + 4) && i <= pages; i++) { %>
+      <% if (i == current) { %>
+      <li class="page-item"><a class="page-link" href="/index/<%= i %>"> <%= i %></a></li>
+<% } else {  %>
+  <li class="page-item"><a class="page-link" href="/index/<%= i %>"> <%= i %></a></li>
+<% } %>
+<% if (i == Number(current) + 4 && i < pages) { %>
+<li class="page-item"><a class="page-link" href="#">...</a></li>
+  <% }} %>
+    <!-- Last Page -->
+<% if (current == pages) { %>
+  <li class="page-item disabled"><a class="page-link" href="/index/<%=pages%>">Última Página</a></li>
+      <% } else { %>
+        <li class="page-item"><a class="page-link" href="/index/<%=pages%>">Última Página</a></li>
+          <% } }%>
+  </ul>
+</nav>
 
 
 

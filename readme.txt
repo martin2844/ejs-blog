@@ -41,3 +41,9 @@ EJS BLOG - Prototype
 
 0.2.4 - Fixed bug with find functionality, looping a NO CONTENT h1 tag everytime a post didn't match
       the correct keyWord
+
+0.3 - Added Bootstrap Pagination, for more than 9 posts, you will have a pagination.
+      -> future implementation should be adding the pagination to search results.
+      -> Also adding AUTH to compose.
+      After this two things the page could possibly be finished,
+      maybe add user upload image.

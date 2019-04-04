@@ -1,4 +1,4 @@
-//jshint esversion:6
+  //jshint esversion:6
 
 //Node Modules
 
@@ -73,14 +73,35 @@ const Post = mongoose.model("Post", postSchema);
 
 //routes
 
-app.get("/", (req,res) => {
-  Post.find({}, function (err, posts) {
-  res.render("home", {home: homeStartingContent, posts: posts});
 
-});
+app.get(["/", "/index/:page"], (req,res,next) => {
+  let perPage = 9;
+  let page = req.params.page || 1;
+  console.log(req.params.page);
+
+  Post.find({})
+  .skip((perPage * page) - perPage)
+  .limit(perPage)
+  .exec((err, posts) => {
+    Post.count((err, count) => {
+      if (err) return next(err);
+      res.render("home", {
+        home: homeStartingContent,
+        posts: posts,
+        current: page,
+        pages: Math.ceil(count / perPage)
+
+      });
+    });
+  });
 
 }
 );
+
+
+
+
+
 
 app.get("/about", (req,res) => {
   res.render("about", {about: aboutContent});
@@ -177,6 +198,6 @@ post.save(function(err){
 
 
 
-app.listen(3000, function() {
+app.listen(process.env.PORT || 3000, function() {
   console.log("Server started on port 3000");
 });
