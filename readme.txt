@@ -1,4 +1,6 @@
 EJS BLOG - Prototype
+This is an EJS Blog using Node, Express, EJS, Body-Parser and MongoDB/Mongoose.
+Really simple once you get a hang of the basic functionality
 
 0.1 - Basic Structure of the blog. Ejs templating for each post. You can compose a post accessing the /compose/ route.
     - Each post is saved as an object to the main allPost variable in the app.js file.
@@ -8,7 +10,7 @@ EJS BLOG - Prototype
 -Possible implementations -> Possibility of adding an image from an outside url
                           -> Adding a DB for the posts, which I guess if I'm adding MongoDB, images will have to be stored as url,
                           will have to be loaded dynamically with ejs.
-                          -> Add dynamic rendering for pages of posts.
+                          -> Add dynamic rendering for pages of posts. (Found out what I meant was actually "Pagination")
                           -> Add post signature
                           -> Add date to posts.
 
