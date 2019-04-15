@@ -49,3 +49,8 @@ Really simple once you get a hang of the basic functionality
       -> Also adding AUTH to compose.
       After this two things the page could possibly be finished,
       maybe add user upload image.
+
+0.4 - Fixed minor html bug in subscribe page
+    - Added Auth for /compose route, will now require a Password and a Hashed Password
+    using Md5.
+

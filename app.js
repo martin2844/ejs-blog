@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const _ = require("lodash");
 const mongoose = require("mongoose");
+var md5 = require('md5');
 
 
 
@@ -65,8 +66,19 @@ const postSchema = new mongoose.Schema ({
   tag1: String,
   tag2: String
 });
+
+//create the schema for the users
+
+const userSchema = new mongoose.Schema ({
+  user: String,
+  password: String
+ });
+ 
 //create the mongoose model
 const Post = mongoose.model("Post", postSchema);
+
+//create the user mongoose model
+const User = mongoose.model("User", userSchema);
 
 
 
@@ -113,7 +125,35 @@ app.get("/contact", (req,res) => {
 
 
 app.get("/compose", (req,res) => {
-  res.render("compose");
+  res.render("auth");
+});
+
+//New User
+
+// const newUser = new User({
+//   user: "Martin",
+//   password: md5("putpasswordhere, save, then upload to git")
+// });
+
+// newUser.save();
+
+
+app.post("/auth", (req,res) => {
+  const username = req.body.username;
+  const password = md5(req.body.password);
+
+  User.findOne({user: username}, (err, foundUser) => {
+    if (err) {
+      console.log(err);
+      res.render("bad login");
+    } else {
+      if (foundUser) {
+        if (foundUser.password === password) {
+          res.render("compose");
+        }
+      }
+    }
+  });
 });
 
 app.get("/subscribe", (req,res) => {
