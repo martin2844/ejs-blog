@@ -51,6 +51,11 @@ Really simple once you get a hang of the basic functionality
       maybe add user upload image.
 
 0.4 - Fixed minor html bug in subscribe page
-    - Added Auth for /compose route, will now require a Password and a Hashed Password
+    - Added Auth for /compose route, will now require a user and a Hashed Password
     using Md5.
+
+0.5 - Added Archive route, will show all posts, sorted by Year, and Month.
+    - Still some tweaks are needed in order to have a nice, rounded Archive.
+    - Still missing a better Auth workaround, maybe using cookies, and generating an admin panel in order
+    to CRUD our database, making it more user friendly.
 

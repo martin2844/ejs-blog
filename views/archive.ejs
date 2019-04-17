@@ -1,0 +1,81 @@
+<%- include("partials/header") -%>
+
+<h1>Archivo</h1>
+
+<ul>
+    <li id="hello">Years</li>
+</ul>
+
+<!-- Por ACA VIENE LA MANO PAPAAAAA -->
+
+<script>
+    const output = document.querySelector('#hello')
+    output.innerHTML = ""
+    let Posts = <%- JSON.stringify(posts) %>;
+    Posts.forEach(function(posts){
+        console.log(posts.yyyy)
+        
+        //List Creation Variables
+        let URL = "/posts/" + posts._id;
+        let year = posts.yyyy;
+        let month = posts.mm;
+        let title = posts.title;
+        let liYear = document.createElement("li");
+        let pYear = document.createElement("p");
+        let ulMo = document.createElement("ul");
+        let liMo = document.createElement("li");
+        let pMo = document.createElement("p");
+        let ulTitle = document.createElement("ul");
+        let liTitle = document.createElement("a");
+        liTitle.setAttribute("href", URL)
+
+        //Selector
+        let Year = document.getElementById(year);
+        let Month = document.getElementById(month)
+      
+       
+       
+
+       if(!Year) {
+           pYear.innerHTML = year;
+           liYear.appendChild(pYear);
+           output.appendChild(liYear);
+           liYear.setAttribute("id", year);
+           liYear.appendChild(ulMo);
+           ulMo.setAttribute("id", month);
+           ulMo.appendChild(liMo);
+           liMo.appendChild(pMo);
+           pMo.innerHTML = month;
+           pMo.appendChild(ulTitle);
+           ulTitle.appendChild(liTitle);
+           liTitle.innerHTML = title;
+
+       } else if (Year) { 
+           if (!Month){ 
+          Year.appendChild(ulMo);
+          ulMo.setAttribute("id", month);
+           ulMo.appendChild(liMo);
+           liMo.appendChild(pMo);
+           pMo.innerHTML = month;
+           pMo.appendChild(ulTitle);
+           ulTitle.appendChild(liTitle);
+           liTitle.innerHTML = title;
+           } else if (Month) {
+               Month.append(ulTitle);
+               ulTitle.appendChild(liTitle);
+                 liTitle.innerHTML = title;
+               
+           }
+
+        }
+
+
+      
+    })
+
+    // Tengo 4 elementos en total, dos de cada año, 2018, 2019, y entonces tendria que tener solo, dos años, 2018, 2019,
+    // ahora me falta que cuando ya exista ese año, abajo se ponga el mes, salvo que exista ese mes.
+</script>
+
+
+<%- include("partials/footer") -%>

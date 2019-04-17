@@ -63,6 +63,9 @@ const postSchema = new mongoose.Schema ({
   imageURL: String,
   ytURL: String,
   date: String,
+  dd: Number,
+  mm: Number,
+  yyyy: Number,
   tag1: String,
   tag2: String
 });
@@ -110,6 +113,14 @@ app.get(["/", "/index/:page"], (req,res,next) => {
 }
 );
 
+app.get("/archive", (req,res) => {
+  Post.find({}).sort({date: 'descending'}).exec((err, posts) => {
+    res.render("archive", {posts: posts});
+  });
+  
+});
+
+//ajustar base de datos, fechas
 
 
 
@@ -170,7 +181,11 @@ Post.findOne({_id: requestedPostId}, function(err,post){
     date: post.date,
     author: author,
     tag1: post.tag1,
-    tag2: post.tag2});
+    tag2: post.tag2,
+    year: post.yyyy,
+    day: post.dd,
+    month:post.mm
+  });
 });
 
 });
@@ -213,7 +228,11 @@ const post = new Post ({
   ytURL: req.body.ytURL,
   date: today,
   tag1: req.body.tag1,
-  tag2: req.body.tag2
+  tag2: req.body.tag2,
+  dd: dd,
+  mm: mm,
+  yyyy: yyyy
+
 });
 
 post.save(function(err){
@@ -227,16 +246,6 @@ post.save(function(err){
 
 
 });
-
-
-
-
-
-
-
-
-
-
 
 app.listen(process.env.PORT || 3000, function() {
   console.log("Server started on port 3000");
