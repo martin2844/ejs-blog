@@ -98,7 +98,7 @@ app.get(["/", "/index/:page"], (req,res,next) => {
   .skip((perPage * page) - perPage)
   .limit(perPage)
   .exec((err, posts) => {
-    Post.count((err, count) => {
+    Post.countDocuments((err, count) => {
       if (err) return next(err);
       res.render("home", {
         home: homeStartingContent,

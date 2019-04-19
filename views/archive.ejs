@@ -11,14 +11,53 @@
 <script>
     const output = document.querySelector('#hello')
     output.innerHTML = ""
+    // @ts-ignore
+
     let Posts = <%- JSON.stringify(posts) %>;
+
     Posts.forEach(function(posts){
         console.log(posts.yyyy)
         
         //List Creation Variables
+ 
+     
         let URL = "/posts/" + posts._id;
         let year = posts.yyyy;
         let month = posts.mm;
+        switch (month) {
+            case 1:
+            month = "Enero";
+            break;
+            case 2:
+            month = "Febrero";
+            break;
+        case 3:
+            month = "Marzo";
+            break;
+        case 4 :
+             month = "Abril";
+            break;
+        case 5:
+            month = "Mayo";
+            break;
+            case 6:
+            month = "Junio";
+            break;
+            case 7:
+            month = "Julio";
+            break;
+            case 8:
+            month = "Agosto";
+            break;
+            case 9:
+            month = "Septiembre";
+            break;
+            case 10:
+            month = "Octubre";
+            break;
+        }
+    
+        
         let title = posts.title;
         let liYear = document.createElement("li");
         let pYear = document.createElement("p");
@@ -31,7 +70,8 @@
 
         //Selector
         let Year = document.getElementById(year);
-        let Month = document.getElementById(month)
+        let Month = document.getElementsByClassName(month)[0];
+        
       
        
        
@@ -42,18 +82,18 @@
            output.appendChild(liYear);
            liYear.setAttribute("id", year);
            liYear.appendChild(ulMo);
-           ulMo.setAttribute("id", month);
+           ulMo.setAttribute("class", month);
            ulMo.appendChild(liMo);
            liMo.appendChild(pMo);
            pMo.innerHTML = month;
            pMo.appendChild(ulTitle);
            ulTitle.appendChild(liTitle);
            liTitle.innerHTML = title;
-
+        
        } else if (Year) { 
            if (!Month){ 
           Year.appendChild(ulMo);
-          ulMo.setAttribute("id", month);
+          ulMo.setAttribute("class", month);
            ulMo.appendChild(liMo);
            liMo.appendChild(pMo);
            pMo.innerHTML = month;
