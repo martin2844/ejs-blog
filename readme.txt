@@ -62,3 +62,7 @@ Really simple once you get a hang of the basic functionality
           - Need to style the archive, and need to take the archive for a basic admin panel with crud functions.
     0.5.2 - Started working on Acordion style archive, for the /archive.
           - Still need to debug....
+
+0.6 - Archive route done, shows all posts, by Year Month, each one directs to the posts URL.
+    - Compose route has now an Added CK editor, for rich text editing on posts.
+    - Missing a way to display only TEXT for front Page image cards.

@@ -105,7 +105,8 @@ padding-top: 30px;
 .post-image {
     width:100%;
     max-width:600px;
-    margin-right: 20px;
+    margin-bottom: 0px;
+    margin-right: 60px;
     border-style: solid;
     border-width: 10px;
     border-color: lightgrey

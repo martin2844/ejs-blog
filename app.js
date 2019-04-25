@@ -7,7 +7,10 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const _ = require("lodash");
 const mongoose = require("mongoose");
-var md5 = require('md5');
+const md5 = require('md5');
+const striptags = require('striptags');
+
+
 
 
 
@@ -101,13 +104,19 @@ app.get(["/", "/index/:page"], (req,res,next) => {
   .exec((err, posts) => {
     Post.countDocuments((err, count) => {
       if (err) return next(err);
-      res.render("home", {
+      // console.log("test")
+      // console.log(JSON.stringify(posts.content))
+      // Missing a way to strip HTML tags from post content, so it only shows txt on frontpage
+            res.render("home", {
         home: homeStartingContent,
         posts: posts,
         current: page,
         pages: Math.ceil(count / perPage)
 
+      
       });
+     
+     
     });
   });
 
@@ -115,7 +124,7 @@ app.get(["/", "/index/:page"], (req,res,next) => {
 );
 
 app.get("/archive", (req,res) => {
-  Post.find({}).select({ "title": 1, "date": 1, "yyyy":1, "mm":1, "dd":1, "_id": 0}).sort({timeStamp: 'descending'}).exec((err, posts) => {
+  Post.find({}).select({ "title": 1, "date": 1, "yyyy":1, "mm":1, "dd":1, "_id": 1}).sort({timeStamp: 'descending'}).exec((err, posts) => {
     res.render("archive", {posts: posts});
   });
 
@@ -124,6 +133,9 @@ app.get("/archive", (req,res) => {
 //ajustar base de datos, fechas
 
 
+app.get("/test", (req,res) => {
+  res.render("test", {about: aboutContent});
+});
 
 
 
@@ -226,6 +238,7 @@ const post = new Post ({
   title: req.body.blogtitle,
   content: req.body.blogpost,
   imageURL: req.body.imageURL,
+  timeStamp: new Date(),
   ytURL: req.body.ytURL,
   date: today,
   tag1: req.body.tag1,

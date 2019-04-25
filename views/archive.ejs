@@ -112,7 +112,7 @@
         yearCardBody.setAttribute("class", "card-body");
 
         //month elements
-        let monthAccordionID = year + "monthAccordion";
+        let monthAccordionID = "monthAccordion" + year;
         let monthAccordionHash = "#" + monthAccordionID;
         let monthAccordion = document.createElement("div");
         monthAccordion.setAttribute("class", "accordion");
@@ -148,7 +148,10 @@
         monthCardBody.setAttribute("class", "card-body");
 
 
+        //post title elements
 
+        let postTitle = document.createElement("a");
+        postTitle.setAttribute("href", URL);
 
 
 
@@ -157,7 +160,7 @@
         let Month = document.getElementById(monthID);
         let Accordion = document.getElementById("yearAccordion");
         let MonthAccordion = document.getElementById(monthAccordionID)
-
+        let collapseMonthSelect = document.getElementById(monthCollapseValue);
 
 
 
@@ -175,14 +178,18 @@
 
             yearCardBody.appendChild(monthAccordion);
             monthAccordion.appendChild(monthCardDiv);
-            //test
+            
             monthCardDiv.appendChild(monthDivHeader);
             monthDivHeader.appendChild(monthH4Header);
             monthH4Header.appendChild(monthButton);
 
             monthCardDiv.appendChild(monthCollapse);
             monthCollapse.appendChild(monthCardBody);
-            monthCardBody.innerHTML = "test1";
+            monthCardBody.appendChild(postTitle);
+            postTitle.innerHTML = "<p>" + title + "</p>";
+
+
+            //begin post title
 
 
 
@@ -194,10 +201,13 @@
              monthH4Header.appendChild(monthButton);
 
              monthCardDiv.appendChild(monthCollapse);
-             monthCollapse.appendChild(monthCardBody)
-             monthCardBody.innerHTML = "test2";
+             monthCollapse.appendChild(monthCardBody);
+             monthCardBody.appendChild(postTitle);
+             postTitle.innerHTML = "<p>" + title + "</p>";
            } else if (Month) {
-
+            
+            collapseMonthSelect.children[0].appendChild(postTitle);
+            postTitle.innerHTML = "<p>" + title + "</p>";
 
            }
 

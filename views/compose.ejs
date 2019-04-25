@@ -1,6 +1,6 @@
 <%- include("partials/header") -%>
 
-
+<script src="//cdn.ckeditor.com/4.11.4/full/ckeditor.js"></script>
 
 <h1>Compose</h1>
 
@@ -38,10 +38,13 @@
       <option>portfolio</option>
     </select>
   </div>
-  <div class="form-group">
+  <div id="editor" class="form-group">
     <label for="blogpost">Post</label>
     <textarea class="form-control form-control-lg" rows="5" cols="30"  type="text" name="blogpost" value="" placeholder="Write your text"></textarea>
   </div>
+  <script>
+  CKEDITOR.replace("blogpost");
+  </script>
 <button class="btn btn-primary" type="submit" name="button">Publish</button>
 </form>
 
