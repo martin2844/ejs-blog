@@ -60,4 +60,5 @@ Really simple once you get a hang of the basic functionality
     to CRUD our database, making it more user friendly.
     0.5.1 - Added a Switch, for case by case, to display month as "november" instead of 11 for example.
           - Need to style the archive, and need to take the archive for a basic admin panel with crud functions.
-
+    0.5.2 - Started working on Acordion style archive, for the /archive.
+          - Still need to debug....

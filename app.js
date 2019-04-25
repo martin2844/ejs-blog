@@ -62,6 +62,7 @@ const postSchema = new mongoose.Schema ({
   content: String,
   imageURL: String,
   ytURL: String,
+  timeStamp: Date,
   date: String,
   dd: Number,
   mm: Number,
@@ -76,7 +77,7 @@ const userSchema = new mongoose.Schema ({
   user: String,
   password: String
  });
- 
+
 //create the mongoose model
 const Post = mongoose.model("Post", postSchema);
 
@@ -114,10 +115,10 @@ app.get(["/", "/index/:page"], (req,res,next) => {
 );
 
 app.get("/archive", (req,res) => {
-  Post.find({}).sort({date: 'descending'}).exec((err, posts) => {
+  Post.find({}).select({ "title": 1, "date": 1, "yyyy":1, "mm":1, "dd":1, "_id": 0}).sort({timeStamp: 'descending'}).exec((err, posts) => {
     res.render("archive", {posts: posts});
   });
-  
+
 });
 
 //ajustar base de datos, fechas
