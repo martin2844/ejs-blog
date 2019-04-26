@@ -63,6 +63,7 @@ mongoose.connect("mongodb://localhost:27017/blogDB", {useNewUrlParser:true});
 const postSchema = new mongoose.Schema ({
   title: String,
   content: String,
+  noTags: String,
   imageURL: String,
   ytURL: String,
   timeStamp: Date,
@@ -237,6 +238,7 @@ app.post("/compose", (req,res) => {
 const post = new Post ({
   title: req.body.blogtitle,
   content: req.body.blogpost,
+  noTags: striptags(req.body.blogpost),
   imageURL: req.body.imageURL,
   timeStamp: new Date(),
   ytURL: req.body.ytURL,

@@ -31,7 +31,8 @@
             <% if (typeof posts.content == 'undefined' ) { %>
                       <p> no content</p>
                   <% } else { %>
-                    <p style="text-align: justify;"><%=  posts.content.substring(0,300) %> ...</p>
+                    <% var noTags = posts.noTags.replace(/&nbsp;|&#39;/g, ' '); %>
+                    <p style="text-align: justify;"><%=  noTags.substring(0,300) %> ...</p>
            <% } %>
 
 

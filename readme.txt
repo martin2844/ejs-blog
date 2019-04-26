@@ -2,6 +2,10 @@ EJS BLOG - Prototype
 This is an EJS Blog using Node, Express, EJS, Body-Parser and MongoDB/Mongoose.
 Really simple once you get a hang of the basic functionality
 
+
+Version History (commits):
+
+
 0.1 - Basic Structure of the blog. Ejs templating for each post. You can compose a post accessing the /compose/ route.
     - Each post is saved as an object to the main allPost variable in the app.js file.
     - Home Page displays all posts in a date descending order.
@@ -66,3 +70,10 @@ Really simple once you get a hang of the basic functionality
 0.6 - Archive route done, shows all posts, by Year Month, each one directs to the posts URL.
     - Compose route has now an Added CK editor, for rich text editing on posts.
     - Missing a way to display only TEXT for front Page image cards.
+    0.6.1 - Displaying only Text, with no Tags. This is done on the backend using striptags. 
+            I had to add another entry to the schema called noTags, which is basically the content of the post
+            after applying striptags to it.
+          - Next Stop is cookies, or something to retain who logged in to post, and then making him the author.
+          - After that, admin panel, which is basically the archive function which lets you CRUD your posts.
+          - After that, I need to redesign the NavBar, add a way to upload images to server, and possibly after that
+          the blog version 1.0 will be finished, at least it will be good for me.
