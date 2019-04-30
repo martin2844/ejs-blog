@@ -7,8 +7,15 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const _ = require("lodash");
 const mongoose = require("mongoose");
-const md5 = require('md5');
 const striptags = require('striptags');
+require('dotenv').config();
+
+// Auth Modules
+const session = require("express-session");
+const passport = require("passport");
+const passportLocalMongoose = require("passport-local-mongoose");
+
+
 
 
 
@@ -40,13 +47,8 @@ if (mm < 10) {
 
 today = dd + '/' + mm + '/' + yyyy;
 
-// author
 
-let author = "Martin";
-
-
-
-//server setup}
+//server setup
 const app = express();
 app.set('view engine', 'ejs');
 
@@ -55,12 +57,33 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
+//session setup
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: false
+}));
+
+//passport setup
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+app.use(function(req, res, next) {
+  res.locals.user = req.session.user;
+  next();
+});
+
+
+
+
 
 //mongoose connection, to local host for this version.
 mongoose.connect("mongodb://localhost:27017/blogDB", {useNewUrlParser:true});
 
 //create the schema for the posts
 const postSchema = new mongoose.Schema ({
+  author: String,
   title: String,
   content: String,
   noTags: String,
@@ -75,6 +98,7 @@ const postSchema = new mongoose.Schema ({
   tag2: String
 });
 
+
 //create the schema for the users
 
 const userSchema = new mongoose.Schema ({
@@ -82,11 +106,24 @@ const userSchema = new mongoose.Schema ({
   password: String
  });
 
+//plugin to salt and hash the password
+userSchema.plugin(passportLocalMongoose);
+
+
 //create the mongoose model
 const Post = mongoose.model("Post", postSchema);
 
 //create the user mongoose model
 const User = mongoose.model("User", userSchema);
+
+
+//avoid deprecation warning
+mongoose.set('useCreateIndex', true);
+
+//passport local mongoose configurations
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 
 
@@ -148,38 +185,72 @@ app.get("/contact", (req,res) => {
   res.render("contact", {contact:contactContent});
 });
 
-
-app.get("/compose", (req,res) => {
+app.get("/auth", (req,res)=>{ 
   res.render("auth");
+})
+
+
+//compose route needs to be authenticated
+app.get("/compose", (req,res) => {
+  if (req.isAuthenticated()){
+    res.render("compose");
+    console.log(req.session.user);
+  } else { 
+
+    res.redirect("/auth");
+
+  }
 });
 
-//New User
-
-// const newUser = new User({
-//   user: "Martin",
-//   password: md5("putpasswordhere, save, then upload to git")
-// });
-
-// newUser.save();
 
 
-app.post("/auth", (req,res) => {
-  const username = req.body.username;
-  const password = md5(req.body.password);
 
-  User.findOne({user: username}, (err, foundUser) => {
-    if (err) {
-      console.log(err);
-      res.render("bad login");
-    } else {
-      if (foundUser) {
-        if (foundUser.password === password) {
-          res.render("compose");
-        }
-      }
-    }
+
+
+app.get("/logout", (req,res) => {
+  req.logout();
+  req.session.user = "";
+  res.redirect("/");
+})
+
+
+
+//New USER Registration Method with Passport.
+
+// // User.register({username: "Martin"}, process.env.NEW_USER_PASSWORD, (err, user) => {
+// //   if (err) { 
+// //     console.log(err);
+// //   } else {
+// //    console.log("saved");
+// //     }
+// //   }
+// // );
+
+
+
+
+app.post("/auth", (req,res)=> {
+  const user = new User ({
+      username: req.body.username,
+      password: req.body.password
   });
+
+req.login(user, (err)=> {
+  if (err) {
+    console.log(err);
+  } else {
+    passport.authenticate("local");
+    req.session.user = req.user.username;
+
+            res.redirect("/compose");
+  }
 });
+
+});
+
+
+
+
 
 app.get("/subscribe", (req,res) => {
   res.render("subscribe");
@@ -193,7 +264,7 @@ Post.findOne({_id: requestedPostId}, function(err,post){
     image: post.imageURL,
     yt: post.ytURL,
     date: post.date,
-    author: author,
+    author: post.author,
     tag1: post.tag1,
     tag2: post.tag2,
     year: post.yyyy,
@@ -236,6 +307,7 @@ app.get("/find", (req,res) => {
 
 app.post("/compose", (req,res) => {
 const post = new Post ({
+  author: req.user.username,
   title: req.body.blogtitle,
   content: req.body.blogpost,
   noTags: striptags(req.body.blogpost),

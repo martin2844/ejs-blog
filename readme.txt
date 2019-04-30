@@ -77,3 +77,10 @@ Version History (commits):
           - After that, admin panel, which is basically the archive function which lets you CRUD your posts.
           - After that, I need to redesign the NavBar, add a way to upload images to server, and possibly after that
           the blog version 1.0 will be finished, at least it will be good for me.
+
+0.7 - Cookies done with Passport, passport-local, passport-local-mongoose, and express-session.
+    - While composing post, depending on who is logged in, it will retain the user name as the Author.
+    - Added Title to compose route, using the Author so you can remember as who you are posting as before doing so.
+    - Added dotenv package to retain secret, and new User Password locally, without uploading to git.
+    - Added Dropdown title to navbar which will show actions available depending wether your logged in or not.
+    - Still missing the ability to upload your own images to the server, and making admin panel.

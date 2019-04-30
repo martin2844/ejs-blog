@@ -2,7 +2,7 @@
 
 <script src="//cdn.ckeditor.com/4.11.4/full/ckeditor.js"></script>
 
-<h1>Compose</h1>
+<h1>You are posting as <%= user %> </h1>
 
 <form class="" action="/compose" method="post">
 
@@ -12,10 +12,10 @@
   </div>
   <div class="form-group">
     <label for="postimage">Post Image</label>
-    <input class="form-control" type="url" name="imageURL" value="" placeholder="putanimageURL">
+    <input class="form-control" type="text" name="imageURL" value="" placeholder="putanimageURL">
   </div>
   <div class="form-group">
-    <label for="postimage">Youtube Url</label>
+    <label for="postimage">Youtube EMBED Url</label>
     <input class="form-control" type="url" name="ytURL" value="" placeholder="Youtube URL">
   </div>
   <div class="form-group">
@@ -26,6 +26,7 @@
       <option>photoshop</option>
       <option>render</option>
       <option>portfolio</option>
+      <option>Tutorial</option>
     </select>
   </div>
   <div class="form-group">
@@ -36,6 +37,7 @@
       <option>Photoshop</option>
       <option>render</option>
       <option>portfolio</option>
+      <option>Tutorial</option>
     </select>
   </div>
   <div id="editor" class="form-group">

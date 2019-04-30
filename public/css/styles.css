@@ -15,6 +15,10 @@
     letter-spacing: 5px;
 }
 
+.noSpacer {
+  letter-spacing: 1px;
+}
+
 .navbarlight a {
   color: #777;
 
