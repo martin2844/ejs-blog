@@ -156,3 +156,43 @@ margin-bottom: -1px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+
+/* new Date div */
+
+.date {
+  border: solid;
+  border-width: 2px;
+  background-color: #fff;
+  color: #333;
+  font-size: 18px;
+  font-weight: 800;
+  min-height: 48px;
+  min-width: 48px;
+  padding: 10px 0;
+  position: absolute;
+  right: 15px;
+  text-align: center;
+  text-transform: uppercase;
+  top: 0;
+}
+
+.date span {
+  display: block;
+  line-height: 14px;
+}
+
+.date .month {
+  font-size: 11px;
+}
+
+
+.card{
+  
+  transition:all .4s ease-in-out;
+}
+
+.card:hover{
+  transform:scale(1.03);
+ 
+}

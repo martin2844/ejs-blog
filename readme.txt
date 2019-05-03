@@ -84,3 +84,5 @@ Version History (commits):
     - Added dotenv package to retain secret, and new User Password locally, without uploading to git.
     - Added Dropdown title to navbar which will show actions available depending wether your logged in or not.
     - Still missing the ability to upload your own images to the server, and making admin panel.
+    0.7.1 - Added Date box for each post card. 
+          - Added Css Animation for cards.

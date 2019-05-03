@@ -134,7 +134,7 @@ passport.deserializeUser(User.deserializeUser());
 app.get(["/", "/index/:page"], (req,res,next) => {
   let perPage = 9;
   let page = req.params.page || 1;
-  console.log(req.params.page);
+  
 
   Post.find({})
   .skip((perPage * page) - perPage)
@@ -215,16 +215,17 @@ app.get("/logout", (req,res) => {
 
 
 
-//New USER Registration Method with Passport.
+// New USER Registration Method with Passport.
 
-// // User.register({username: "Martin"}, process.env.NEW_USER_PASSWORD, (err, user) => {
-// //   if (err) { 
-// //     console.log(err);
-// //   } else {
-// //    console.log("saved");
-// //     }
-// //   }
-// // );
+// User.register({username: "Martin"}, process.env.NEW_USER_PASSWORD, (err, user) => {
+//   if (err) { 
+//     console.log(err);
+//   } else {
+//    console.log("saved");
+//     }
+//   }
+// );
+
 
 
 

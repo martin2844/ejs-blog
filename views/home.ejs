@@ -19,8 +19,12 @@
   <% const url = "/posts/" + posts._id %>
   <% const tag1Url = "/tags/" + posts.tag1 %>
   <% const tag2Url = "/tags/" + posts.tag2 %>
+  <% let month = posts.mm %>
+  <% switch(month){case 1:month="Enero";break;case 2:month="Febrero";break;case 3:month="Marzo";break;case 4:month="Abril";break;case 5:month="Mayo";break;case 6:month="Junio";break;case 7:month="Julio";break;case 8:month="Agosto";break;case 9:month="Septiembre";break;case 10:month="Octubre";break;case 11:month="Noviembre";break;case 12:month="Diciembre"} %>
+
   <div class="col-md-4">
       <div class="card mb-4 shadow-sm">
+          <div class="date"><span class="day"><%= posts.dd %></span><span class="month"><%= month %></span></div>
         <a href="<%= url %>"><img class="card-img-top" src="<%=posts.imageURL%>" alt="Card image cap"></a>
           <div class="card-body">
             <h1><%=  posts.title %></h1>
@@ -81,6 +85,7 @@
           <% } }%>
   </ul>
 </nav>
+
 
 
 
