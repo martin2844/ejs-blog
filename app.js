@@ -137,6 +137,7 @@ app.get(["/", "/index/:page"], (req,res,next) => {
   
 
   Post.find({})
+  .sort({timeStamp: 'descending'})
   .skip((perPage * page) - perPage)
   .limit(perPage)
   .exec((err, posts) => {
@@ -280,9 +281,12 @@ Post.findOne({_id: requestedPostId}, function(err,post){
 app.get("/tags/:tagFound", (req,res) => {
   const requestedTag = req.params.tagFound;
   console.log(requestedTag);
-  Post.find( {$or:[ {tag1: requestedTag}, {tag2:requestedTag} ] } , function(err,posts){
+  Post.find( {$or:[ {tag1: requestedTag}, {tag2:requestedTag} ] })
+  .sort({timeStamp: 'descending'})
+  .exec((err,posts) => {
     if(!err) res.render("tag", {posts: posts, tag: requestedTag });
-  });
+  }); 
+  
 
   });
 
@@ -292,7 +296,9 @@ app.post("/find", (req, res) => {
   let keyWordCap = req.body.keyword;
   let keyWord = _.lowerCase(keyWordCap);
   console.log(keyWord);
-  Post.find({}, function (err, posts) {
+  Post.find({})
+  .sort({timeStamp: 'descending'})
+  .exec((err,posts) => {
   res.render("find", {keyWord: keyWord, posts: posts});
 });
 });

@@ -187,12 +187,12 @@ margin-bottom: -1px;
 }
 
 
-.card{
+.card.mb-4{
   
   transition:all .4s ease-in-out;
 }
 
-.card:hover{
+.card.mb-4:hover{
   transform:scale(1.03);
  
 }

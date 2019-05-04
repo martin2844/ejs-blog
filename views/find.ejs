@@ -16,16 +16,20 @@
       <% const tag2Url = "/tags/" + posts.tag2 %>
       <% const postContent = posts.content.toLowerCase(); %>
       <% const postTitle = posts.title.toLowerCase(); %>
+      <% let month = posts.mm %>
+      <% switch(month){case 1:month="Enero";break;case 2:month="Febrero";break;case 3:month="Marzo";break;case 4:month="Abril";break;case 5:month="Mayo";break;case 6:month="Junio";break;case 7:month="Julio";break;case 8:month="Agosto";break;case 9:month="Septiembre";break;case 10:month="Octubre";break;case 11:month="Noviembre";break;case 12:month="Diciembre"} %>
 
       <% if (postContent.includes(keyWord) || postTitle.includes(keyWord)) { %>
       <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
+              <div class="date"><span class="day"><%= posts.dd %></span><span class="month"><%= month %></span></div>
             <a href="<%= url %>"><img class="card-img-top" src="<%=posts.imageURL%>" alt="Card image cap"></a>
               <div class="card-body">
                 <h1><%=  posts.title %></h1>
+                <% var noTags = posts.noTags.replace(/&nbsp;|&#39;/g, ' '); %>
+                <p style="text-align: justify;"><%=  noTags.substring(0,300) %> ...</p>
 
-
-                        <p style="text-align: justify;"><%=  posts.content.substring(0,300) %> ...</p>
+                        
 
 
 

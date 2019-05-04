@@ -86,3 +86,6 @@ Version History (commits):
     - Still missing the ability to upload your own images to the server, and making admin panel.
     0.7.1 - Added Date box for each post card. 
           - Added Css Animation for cards.
+    0.7.2 - Bug fixing on routes, specifically on descending order post sort.
+          - Css Animation bug fixing, it was animating cards on archive which was not intended.
+          
