@@ -1,0 +1,282 @@
+<%- include("partials/header") -%>
+<h1>Panel de Administrador</h1>
+<p>Bienvenido <%= user %> </p>
+
+
+
+
+
+
+
+
+<h2>Listado de posts</h2>
+<div class="accordion" id="yearAccordion">
+
+</div>
+
+<script>
+    const output = document.querySelector('#yearAccordion')
+    output.innerHTML = "";
+    // @ts-ignore
+
+    let Posts = <%- JSON.stringify(posts) %>;
+
+    Posts.forEach(function (posts) {
+        
+
+        //List Creation Variables
+
+
+        let URL = "/posts/" + posts._id;
+        let editURL = "/edit/" + posts._id;
+        let year = posts.yyyy;
+        let month = posts.mm;
+        switch (month) {
+            case 1:
+                month = "Enero";
+                break;
+            case 2:
+                month = "Febrero";
+                break;
+            case 3:
+                month = "Marzo";
+                break;
+            case 4:
+                month = "Abril";
+                break;
+            case 5:
+                month = "Mayo";
+                break;
+            case 6:
+                month = "Junio";
+                break;
+            case 7:
+                month = "Julio";
+                break;
+            case 8:
+                month = "Agosto";
+                break;
+            case 9:
+                month = "Septiembre";
+                break;
+            case 10:
+                month = "Octubre";
+                break;
+            case 11:
+                month = "Noviembre";
+                break;
+            case 12:
+                month = "Diciembre";
+                break;
+        }
+
+
+        let title = posts.title;
+
+        //declare year variables
+        let yearTarget = "#" + year;
+        let yearCollapseValue = "collapse" + year;
+        let yearCollapseTarget = "#" + yearCollapseValue;
+
+        //declare month variables
+        let monthCollapseValue = "collapse" + month;
+        let monthCollapseTarget = "#" + monthCollapseValue;
+        let monthID = month + year;
+
+        //year elements
+        let yearCardDiv = document.createElement("div");
+        let yearDivHeader = document.createElement("div");
+        let yearH2Header = document.createElement("h2");
+        let yearButton = document.createElement("button");
+
+        yearCardDiv.setAttribute("class", "card");
+
+        yearDivHeader.setAttribute("class", "card-header");
+        yearDivHeader.setAttribute("id", year);
+
+        yearH2Header.setAttribute("class", "mb-0");
+
+        yearButton.setAttribute("class", "btn btn-link");
+        yearButton.setAttribute("type", "button");
+        yearButton.setAttribute("data-toggle", "collapse");
+        yearButton.setAttribute("data-target", yearCollapseTarget);
+        yearButton.innerHTML = year;
+
+
+        let yearCollapse = document.createElement("div");
+        let yearCardBody = document.createElement("div");
+
+        yearCollapse.setAttribute("id", yearCollapseValue);
+        yearCollapse.setAttribute("class", "collapse");
+        yearCollapse.setAttribute("data-parent", "#yearAccordion");
+
+        yearCardBody.setAttribute("class", "card-body");
+
+        //month elements
+        let monthAccordionID = "monthAccordion" + year;
+        let monthAccordionHash = "#" + monthAccordionID;
+        let monthAccordion = document.createElement("div");
+        monthAccordion.setAttribute("class", "accordion");
+        monthAccordion.setAttribute("id", monthAccordionID);
+
+
+        let monthCardDiv = document.createElement("div");
+        let monthDivHeader = document.createElement("div");
+        let monthH4Header = document.createElement("h4");
+        let monthButton = document.createElement("button");
+
+        monthCardDiv.setAttribute("class", "card");
+
+        monthDivHeader.setAttribute("class", "card-header");
+        monthDivHeader.setAttribute("id", monthID);
+
+
+        monthH4Header.setAttribute("class", "mb-0");
+
+        monthButton.setAttribute("class", "btn btn-link");
+        monthButton.setAttribute("type", "button");
+        monthButton.setAttribute("data-toggle", "collapse");
+        monthButton.setAttribute("data-target", monthCollapseTarget);
+        monthButton.innerHTML = month;
+
+        let monthCollapse = document.createElement("div");
+        let monthCardBody = document.createElement("div");
+
+        monthCollapse.setAttribute("id", monthCollapseValue);
+        monthCollapse.setAttribute("class", "collapse");
+        monthCollapse.setAttribute("data-parent", monthAccordionHash);
+
+        monthCardBody.setAttribute("class", "card-body");
+
+
+        //post title elements
+        let postDiv = document.createElement("div")
+        let postTitle = document.createElement("a");
+        let postTitleEdit = document.createElement("a");
+        let postTitleDelete = document.createElement("a");
+        postDiv.setAttribute("style", "padding: 0.1rem; margin-top:auto; margin-bottom:0.50rem; background-color:lightgrey;")
+        postTitle.setAttribute("href", URL);
+        postTitleEdit.setAttribute("href", editURL);
+        postTitleEdit.setAttribute("style", "color:green; float:right; padding-left:10px;");
+        postTitleDelete.setAttribute("href", editURL);
+        postTitleDelete.setAttribute("style", "color:red; float:right; padding-left:10px;");
+
+
+
+
+        //Selector
+        let Year = document.getElementById(year);
+        let Month = document.getElementById(monthID);
+        let Accordion = document.getElementById("yearAccordion");
+        let MonthAccordion = document.getElementById(monthAccordionID)
+        let collapseMonthSelect = document.getElementById(monthCollapseValue);
+
+
+
+
+        if (!Year) {
+            //Begin Year Accordion
+            Accordion.appendChild(yearCardDiv);
+            yearCardDiv.appendChild(yearDivHeader);
+            yearDivHeader.appendChild(yearH2Header);
+            yearH2Header.appendChild(yearButton);
+
+            yearCardDiv.appendChild(yearCollapse);
+            yearCollapse.appendChild(yearCardBody);
+            //Begin Month Accordion
+
+            yearCardBody.appendChild(monthAccordion);
+            monthAccordion.appendChild(monthCardDiv);
+
+            monthCardDiv.appendChild(monthDivHeader);
+            monthDivHeader.appendChild(monthH4Header);
+            monthH4Header.appendChild(monthButton);
+
+            monthCardDiv.appendChild(monthCollapse);
+            monthCollapse.appendChild(monthCardBody);
+            monthCardBody.appendChild(postDiv)
+            postDiv.appendChild(postTitle);
+            postDiv.appendChild(postTitleDelete);
+            postDiv.appendChild(postTitleEdit);
+           
+            postTitle.innerHTML = title;
+            postTitleEdit.innerHTML = "Edit";
+            postTitleDelete.innerHTML = "Delete";
+
+            //begin post title
+
+
+
+        } else if (Year) {
+            if (!Month) {
+                MonthAccordion.appendChild(monthCardDiv);
+                monthCardDiv.appendChild(monthDivHeader);
+                monthDivHeader.appendChild(monthH4Header);
+                monthH4Header.appendChild(monthButton);
+
+                monthCardDiv.appendChild(monthCollapse);
+                monthCollapse.appendChild(monthCardBody);
+                monthCardBody.appendChild(postDiv);
+                postDiv.appendChild(postTitle);
+                postDiv.appendChild(postTitleDelete);
+                postDiv.appendChild(postTitleEdit);
+                postTitle.innerHTML = title;
+                postTitleEdit.innerHTML = "Edit";
+                postTitleDelete.innerHTML = "Delete";
+
+            } else if (Month) {
+
+                collapseMonthSelect.children[0].appendChild(postDiv);
+                postDiv.appendChild(postTitle);
+                postDiv.appendChild(postTitleDelete);
+                postDiv.appendChild(postTitleEdit);
+                 postTitle.innerHTML = title;
+                postTitleEdit.innerHTML = "Edit";
+                postTitleDelete.innerHTML = "Delete";
+
+            }
+
+        }
+
+
+
+    })
+
+    // Tengo 4 elementos en total, dos de cada año, 2018, 2019, y entonces tendria que tener solo, dos años, 2018, 2019,
+    // ahora me falta que cuando ya exista ese año, abajo se ponga el mes, salvo que exista ese mes.
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%- include("partials/footer") -%>

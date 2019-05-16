@@ -204,6 +204,33 @@ app.get("/compose", (req,res) => {
 });
 
 
+app.get("/admin", (req, res) => {
+  if (req.isAuthenticated()) {
+    Post.find({}).select({
+      "title": 1,
+      "date": 1,
+      "yyyy": 1,
+      "mm": 1,
+      "dd": 1,
+      "_id": 1
+    }).sort({
+      timeStamp: 'descending'
+    }).exec((err, posts) => {
+      res.render("admin", {
+        posts: posts
+      });
+    });
+    
+    
+  } else {
+
+    res.redirect("/auth");
+
+  }
+});
+
+
+
 
 
 
@@ -212,7 +239,7 @@ app.get("/logout", (req,res) => {
   req.logout();
   req.session.user = "";
   res.redirect("/");
-})
+});
 
 
 
@@ -275,7 +302,44 @@ Post.findOne({_id: requestedPostId}, function(err,post){
   });
 });
 
+})
+.patch("/posts/:postId", (req, res) => {
+  const requestedPostId = req.params.postId;
+  Post.findOne({
+        _id: requestedPostId
+      });
+})
+.delete("posts/:postId", (req,res) => {
+  const requestedPostId = req.params.postId;
+  Post.findOneAndDelete({
+    _id: requestedPostId
+  });
 });
+
+app.get("/edit/:postId", (req, res) => {
+  const requestedPostId = req.params.postId;
+  Post.findOne({
+    _id: requestedPostId
+  }, function (err, post) {
+    res.render("post", {
+      title: post.title,
+      content: post.content,
+      image: post.imageURL,
+      yt: post.ytURL,
+      date: post.date,
+      author: post.author,
+      tag1: post.tag1,
+      tag2: post.tag2,
+      year: post.yyyy,
+      day: post.dd,
+      month: post.mm
+    });
+  });
+
+});
+
+
+
 
 
 app.get("/tags/:tagFound", (req,res) => {

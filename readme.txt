@@ -89,3 +89,8 @@ Version History (commits):
     0.7.2 - Bug fixing on routes, specifically on descending order post sort.
           - Css Animation bug fixing, it was animating cards on archive which was not intended.
           
+          0.7.2.1 - Added Delete and Edit to each item
+                  - Need to work out how to delete item using .delete route or try and make a /delete/:postID route which will execute the 
+                  delete of the post and will refresh
+
+          
