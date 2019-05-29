@@ -93,4 +93,9 @@ Version History (commits):
                   - Need to work out how to delete item using .delete route or try and make a /delete/:postID route which will execute the 
                   delete of the post and will refresh
 
+          0.7.2.2 - Delete route now working, in REST full api form, but will only work if AUTHED, so you have to be logged in and do it from
+          the admin panel.
+                  - Need to implement AJAX to load all posts, therefore once I delete it will automatically clear the deleted Item.
+                  
+
           

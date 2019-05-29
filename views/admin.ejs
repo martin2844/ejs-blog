@@ -13,7 +13,7 @@
 <div class="accordion" id="yearAccordion">
 
 </div>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
     const output = document.querySelector('#yearAccordion')
     output.innerHTML = "";
@@ -23,14 +23,24 @@
 
     Posts.forEach(function (posts) {
         
-
-        //List Creation Variables
+    
 
 
         let URL = "/posts/" + posts._id;
         let editURL = "/edit/" + posts._id;
+        let postID = posts._id;
+        let deleteID = "#" + posts._id;
         let year = posts.yyyy;
         let month = posts.mm;
+        
+
+       
+
+
+            //List Creation Variables
+
+
+
         switch (month) {
             case 1:
                 month = "Enero";
@@ -70,7 +80,7 @@
                 break;
         }
 
-
+        let monthYear = month + year;
         let title = posts.title;
 
         //declare year variables
@@ -137,6 +147,7 @@
         monthButton.setAttribute("type", "button");
         monthButton.setAttribute("data-toggle", "collapse");
         monthButton.setAttribute("data-target", monthCollapseTarget);
+        monthButton.setAttribute("id", monthYear);
         monthButton.innerHTML = month;
 
         let monthCollapse = document.createElement("div");
@@ -158,7 +169,8 @@
         postTitle.setAttribute("href", URL);
         postTitleEdit.setAttribute("href", editURL);
         postTitleEdit.setAttribute("style", "color:green; float:right; padding-left:10px;");
-        postTitleDelete.setAttribute("href", editURL);
+        postTitleDelete.setAttribute("href", "#");
+        postTitleDelete.setAttribute("id", postID);
         postTitleDelete.setAttribute("style", "color:red; float:right; padding-left:10px;");
 
 
@@ -239,12 +251,43 @@
         }
 
 
+             $(function(){
+            //delete function
+            $(deleteID).on('click', function(){
+                console.log("testDelete");
+                $.ajax({
+                    url: URL,
+                    method: 'DELETE',
+                    success: function(response) {
+                    console.log(response);
+                    $('#' + monthYear).click();
+                    }
+                })
+            });
+            });
 
     })
 
     // Tengo 4 elementos en total, dos de cada año, 2018, 2019, y entonces tendria que tener solo, dos años, 2018, 2019,
     // ahora me falta que cuando ya exista ese año, abajo se ponga el mes, salvo que exista ese mes.
+
+    
+
+
 </script>
+
+<style>
+
+.btn {
+border: none;
+background-color: inherit;
+padding: 14px 28px;
+font-size: 16px;
+cursor: pointer;
+display: inline-block;
+}
+
+</style>
 
 
 

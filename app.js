@@ -285,7 +285,8 @@ app.get("/subscribe", (req,res) => {
   res.render("subscribe");
 });
 
-app.get("/posts/:postId", (req,res) => {
+app.route("/posts/:postId")
+.get((req,res) => {
 const requestedPostId = req.params.postId;
 Post.findOne({_id: requestedPostId}, function(err,post){
   res.render("post", {title: post.title,
@@ -303,17 +304,27 @@ Post.findOne({_id: requestedPostId}, function(err,post){
 });
 
 })
-.patch("/posts/:postId", (req, res) => {
+.patch((req, res) => {
   const requestedPostId = req.params.postId;
   Post.findOne({
         _id: requestedPostId
       });
 })
-.delete("posts/:postId", (req,res) => {
-  const requestedPostId = req.params.postId;
-  Post.findOneAndDelete({
-    _id: requestedPostId
-  });
+.delete((req,res) => {
+  if (req.isAuthenticated()) {
+   Post.deleteOne({
+       _id: req.params.postId
+     },
+     function (err) {
+       if (!err) {
+         res.send("Successfully deleted the corresponding article.");
+       } else {
+         res.send(err);
+       }
+     }
+   );} else {
+     console.log("not authenticated");
+   }
 });
 
 app.get("/edit/:postId", (req, res) => {
