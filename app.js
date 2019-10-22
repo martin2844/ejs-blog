@@ -59,7 +59,7 @@ app.use(express.static("public"));
 
 //session setup
 app.use(session({
-  secret: process.env.SECRET,
+  secret: '123123',
   resave: false,
   saveUninitialized: false
 }));
@@ -79,7 +79,7 @@ app.use(function(req, res, next) {
 
 
 //mongoose connection, to local host for this version.
-mongoose.connect("mongodb://localhost:27017/blogDB", {useNewUrlParser:true});
+mongoose.connect("mongodb+srv://admin:algo1234@cluster0-ekehs.mongodb.net/blogDB", {useNewUrlParser: true});
 
 //create the schema for the posts
 const postSchema = new mongoose.Schema ({
@@ -245,7 +245,7 @@ app.get("/logout", (req,res) => {
 
 // New USER Registration Method with Passport.
 
-// User.register({username: "Martin"}, process.env.NEW_USER_PASSWORD, (err, user) => {
+// User.register({username: "Test"}, '123123', (err, user) => {
 //   if (err) { 
 //     console.log(err);
 //   } else {

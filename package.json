@@ -1,5 +1,5 @@
 {
-  "name": "ejs-challenge",
+  "name": "ejs-blog",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -14,7 +14,7 @@
     "ejs": "^2.6.1",
     "express": "^4.16.3",
     "express-session": "^1.16.1",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.15",
     "md5": "^2.2.1",
     "mongoose": "^5.4.19",
     "passport": "^0.4.0",

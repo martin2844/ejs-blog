@@ -98,4 +98,15 @@ Version History (commits):
                   - Need to implement AJAX to load all posts, therefore once I delete it will automatically clear the deleted Item.
                   
 
-          
+    0.8.0 - 2019/October update:
+            Changed mongo local to Mongo cloud so I can have it live and running.
+            Blog most probably wont be updated any further, I created this when I did not know about react.
+            But the blog shows quite a bit of nice things:
+
+            1. Node JS and MongoDB for CRUD.
+            2. Live heroku deploy.
+            3. Pagination
+            4. BootStrap 4 styling
+            5. Search function using mongoose.
+            6. User auth with passport.
+            
