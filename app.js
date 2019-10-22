@@ -245,7 +245,7 @@ app.get("/logout", (req,res) => {
 
 // New USER Registration Method with Passport.
 
-// User.register({username: "Test"}, '123123', (err, user) => {
+// User.register({username: "Test"}, (this Has to be replaced with password), (err, user) => {
 //   if (err) { 
 //     console.log(err);
 //   } else {
